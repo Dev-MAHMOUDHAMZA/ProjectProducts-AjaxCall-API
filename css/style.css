@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(226, 223, 223);
+}
+
+.block {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+h1,
+label {
+    color: #ffff;
+}
