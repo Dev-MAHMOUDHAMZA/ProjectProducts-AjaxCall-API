@@ -30,7 +30,7 @@ Savecategory = () => {
         data: data,
         cache: false,
         success: function(data) {
-            RestCategory();
+            ResetCategory();
             ShowCategory();
             ShowTableCategory();
             CountCategory();
@@ -50,7 +50,7 @@ Savecategory = () => {
 
 //Rest Category
 
-RestCategory = () => {
+ResetCategory = () => {
     category.value = '';
 
 };

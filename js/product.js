@@ -7,7 +7,7 @@ let price = document.getElementById('price');
 let descount = document.getElementById('descount');
 let total = document.getElementById('total');
 let btnSave = document.getElementById('btnSave');
-let btnRestPro = document.getElementById('btnRestPro');
+let btnResetPro = document.getElementById('btnResetPro');
 let bodyProduct = document.getElementById('bodyProduct');
 let countpro = document.getElementById('countpro');
 
@@ -59,7 +59,7 @@ SaveProduct = () => {
             if (data != null) {
 
                 toastr.success('Save the New Product' + " " + data.name, 'Successfuly');
-                RestProduct();
+                ResetProduct();
                 ShowTable();
                 CountProduct();
 
@@ -76,7 +76,7 @@ SaveProduct = () => {
             if (data != null) {
 
                 toastr.warning('Edit the  Product' + " " + data.name, 'Successfuly');
-                RestProduct();
+                ResetProduct();
                 ShowTable();
                 CountProduct();
 
@@ -96,7 +96,7 @@ SaveProduct = () => {
 
 //Rest
 
-RestProduct = () => {
+ResetProduct = () => {
     ddlcategorys.value = '';
     product.value = '';
     price.value = 0;
@@ -220,7 +220,7 @@ quntity.addEventListener('change', GetTotal);
 descount.addEventListener('change', GetTotal);
 
 btnSave.addEventListener('click', SaveProduct);
-btnRestPro.addEventListener('click', RestProduct);
+btnResetPro.addEventListener('click', ResetProduct);
 
 
 
