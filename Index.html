@@ -82,7 +82,7 @@
             </div>
 
             <div class="text-center col-md-12 " style="margin-top: 10px;">
-                <button class="btn btn-danger w-25">
+                <button class="btn btn-danger w-25" onclick="PrintTable('divTable')">
                     <i class="fas fa-print"></i>
                 </button>
                 <button class="btn btn-dark w-25" id="btnResetPro">
@@ -100,7 +100,7 @@
 
         <!-- Table -->
 
-        <div class="row bg-info m-1 block">
+        <div class="row bg-info m-1 block" id="divTable">
             <div class="col-md-12 ">
                 <table class="table table-striped table-border table-hover table-responsive bg-white  col-sm-12" id="tablPro">
                     <thead>
