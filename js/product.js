@@ -11,6 +11,12 @@ let btnResetPro = document.getElementById('btnResetPro');
 let bodyProduct = document.getElementById('bodyProduct');
 let countpro = document.getElementById('countpro');
 
+let lbcate = document.getElementById('lbcate');
+let lbProduct = document.getElementById('lbProduct');
+let lbqutity = document.getElementById('lbqutity');
+let lbPrice = document.getElementById('lbPrice');
+let lbDescount = document.getElementById('lbDescount');
+
 let btnStatus = 'Create';
 let proId;
 
@@ -50,6 +56,9 @@ SaveProduct = () => {
         descount: descount.value,
         total: total.value
     };
+
+    if (ValidationProduct() == false)
+        return;
 
     let data = JSON.stringify(objProduct);
 
@@ -204,10 +213,102 @@ DeleteProduct = (id) => {
 
 };
 
+//Validation
+
+ValidationProduct = () => {
+
+    let isValid = true;
+
+    if (ddlcategorys.value == '') {
+
+        lbcate.innerHTML = 'Category : * [Required]';
+        lbcate.style.color = 'red';
+        isValid = false;
+
+    } else {
+
+        lbcate.innerHTML = 'Category : *';
+        lbcate.style.color = 'white';
+        isValid = true;
+    }
+
+
+    if (product.value == '') {
+
+        lbProduct.innerHTML = ' Product Name : * [Required]';
+        lbProduct.style.color = 'red';
+        isValid = false;
+
+    } else if (!isNaN(product.value)) {
+        lbProduct.innerHTML = '[Not a Number]';
+        lbProduct.style.color = 'red';
+        isValid = false;
+    } else {
+        lbProduct.innerHTML = ' Product Name : * ';
+        lbProduct.style.color = 'white';
+        isValid = true;
+    }
+
+
+
+    if (quntity.value == '' || quntity.value == 0) {
+
+        lbqutity.innerHTML = '* [Required]';
+        lbqutity.style.color = 'red';
+        isValid = false;
+
+    } else if (isNaN(quntity.value)) {
+        lbqutity.innerHTML = '[Not a Char]';
+        lbqutity.style.color = 'red';
+        isValid = false;
+    } else {
+        lbqutity.innerHTML = 'Quntity : *';
+        lbqutity.style.color = 'white';
+        isValid = true;
+    }
+
+
+    if (price.value == '' || price.value == 0) {
+
+        lbPrice.innerHTML = 'Price : * [Required]';
+        lbPrice.style.color = 'red';
+        isValid = false;
+
+    } else if (isNaN(price.value)) {
+        lbPrice.innerHTML = '[Not a Char]';
+        lbPrice.style.color = 'red';
+        isValid = false;
+    } else {
+        lbPrice.innerHTML = 'Price : *';
+        lbPrice.style.color = 'white';
+        isValid = true;
+    }
+
+
+    if (descount.value == '') {
+
+        lbDescount.innerHTML = 'Enter zero';
+        lbDescount.style.color = 'red';
+        isValid = false;
+
+    } else if (isNaN(descount.value)) {
+        lbDescount.innerHTML = '[Not a Char]';
+        lbDescount.style.color = 'red';
+        isValid = false;
+    } else {
+        lbDescount.innerHTML = 'Descount';
+        lbDescount.style.color = 'white';
+        isValid = true;
+    }
+
+    return isValid;
+
+};
+
 
 //Print
 
-//Validation
+
 
 
 //Event Run Time
