@@ -34,31 +34,6 @@ $(document).ready(function() {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 PrintTable = (el) => {
 
     let body = document.body.innerHTML;
