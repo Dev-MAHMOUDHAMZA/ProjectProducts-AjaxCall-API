@@ -17,6 +17,7 @@ let lbqutity = document.getElementById('lbqutity');
 let lbPrice = document.getElementById('lbPrice');
 let lbDescount = document.getElementById('lbDescount');
 
+
 let btnStatus = 'Create';
 let proId;
 
@@ -57,10 +58,10 @@ SaveProduct = () => {
         total: total.value
     };
 
-    if (ValidationProduct() == false)
-        return;
-
     let data = JSON.stringify(objProduct);
+
+    if (ValdiactionProduct() == false)
+        return;
 
     if (btnStatus == 'Create') {
         Helper.AjaxCallPost(UrlPro, data, (data) => {
@@ -69,7 +70,8 @@ SaveProduct = () => {
 
                 toastr.success('Save the New Product' + " " + data.name, 'Successfuly');
                 ResetProduct();
-                ShowTable();
+                //ShowTable();
+                ShowTable.ajax.reload();
                 CountProduct();
 
             } else {
@@ -86,7 +88,8 @@ SaveProduct = () => {
 
                 toastr.warning('Edit the  Product' + " " + data.name, 'Successfuly');
                 ResetProduct();
-                ShowTable();
+                //ShowTable();
+                ShowTable.ajax.reload();
                 CountProduct();
 
             } else {
@@ -119,40 +122,40 @@ ResetProduct = () => {
 
 //Show Table
 
-ShowTable = () => {
+//ShowTable = () => {
 
-    let TableProduct = '';
+//let TableProduct = '';
 
-    Helper.AjaxCallGet(UrlPro, (data) => {
+//Helper.AjaxCallGet(UrlPro, (data) => {
 
-        data.forEach(data => {
+//data.forEach(data => {
 
-            TableProduct += `
-            <tr>
-            <td>${data.id}</td>
-            <td>${data.category.name}</td>
-            <td>${data.name}</td>
-            <td>${data.quntity}</td>
-            <td>${data.price}</td>
-            <td>${data.descount}</td>
-            <td>${data.total}</td>
-            <td>
-                <button class="btn btn-info" onclick="EditProduct(${data.id})">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-danger" onclick="DeleteProduct(${data.id})">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
+//TableProduct += `
+//<tr>
+//<td>${data.id}</td>
+//<td>${data.category.name}</td>
+//<td>${data.name}</td>
+//<td>${data.quntity}</td>
+//<td>${data.price}</td>
+//<td>${data.descount}</td>
+//<td>${data.total}</td>
+//<td>
+//<button class="btn btn-info" onclick="EditProduct(${data.id})">
+//<i class="fas fa-edit"></i>
+//</button>
+//<button class="btn btn-danger" onclick="DeleteProduct(${data.id})">
+//<i class="fas fa-trash"></i>
+//</button>
+//</td>
+//</tr>
+//`;
 
-        </tr>
-            `;
+//});
+//bodyProduct.innerHTML = TableProduct;
+//});
 
-        });
-        bodyProduct.innerHTML = TableProduct;
-    });
 
-};
+//};
 
 
 //Count
@@ -203,7 +206,8 @@ DeleteProduct = (id) => {
 
         Helper.AjaxCallDelete(`${UrlPro}/${id}`, (data) => {
             if (data != null) {
-                ShowTable();
+                //ShowTable();
+                ShowTable.ajax.reload();
                 CountProduct();
                 toastr.error('Delete the Category is Name  ' + data.name, 'Deleted');
             }
@@ -215,7 +219,7 @@ DeleteProduct = (id) => {
 
 //Validation
 
-ValidationProduct = () => {
+ValdiactionProduct = () => {
 
     let isValid = true;
 
@@ -226,7 +230,6 @@ ValidationProduct = () => {
         isValid = false;
 
     } else {
-
         lbcate.innerHTML = 'Category : *';
         lbcate.style.color = 'white';
         isValid = true;
@@ -234,8 +237,7 @@ ValidationProduct = () => {
 
 
     if (product.value == '') {
-
-        lbProduct.innerHTML = ' Product Name : * [Required]';
+        lbProduct.innerHTML = 'Product Name : * [Required]';
         lbProduct.style.color = 'red';
         isValid = false;
 
@@ -243,12 +245,12 @@ ValidationProduct = () => {
         lbProduct.innerHTML = '[Not a Number]';
         lbProduct.style.color = 'red';
         isValid = false;
+
     } else {
-        lbProduct.innerHTML = ' Product Name : * ';
+        lbProduct.innerHTML = 'Product Name : *';
         lbProduct.style.color = 'white';
         isValid = true;
     }
-
 
 
     if (quntity.value == '' || quntity.value == 0) {
@@ -258,9 +260,10 @@ ValidationProduct = () => {
         isValid = false;
 
     } else if (isNaN(quntity.value)) {
-        lbqutity.innerHTML = '[Not a Char]';
+        lbqutity.innerHTML = '[Not a Number]';
         lbqutity.style.color = 'red';
         isValid = false;
+
     } else {
         lbqutity.innerHTML = 'Quntity : *';
         lbqutity.style.color = 'white';
@@ -270,14 +273,15 @@ ValidationProduct = () => {
 
     if (price.value == '' || price.value == 0) {
 
-        lbPrice.innerHTML = 'Price : * [Required]';
+        lbPrice.innerHTML = '* [Required]';
         lbPrice.style.color = 'red';
         isValid = false;
 
     } else if (isNaN(price.value)) {
-        lbPrice.innerHTML = '[Not a Char]';
+        lbPrice.innerHTML = '[Not a Number]';
         lbPrice.style.color = 'red';
         isValid = false;
+
     } else {
         lbPrice.innerHTML = 'Price : *';
         lbPrice.style.color = 'white';
@@ -286,15 +290,14 @@ ValidationProduct = () => {
 
 
     if (descount.value == '') {
-
-        lbDescount.innerHTML = 'Enter zero';
-        lbDescount.style.color = 'red';
+        lbDescount.innerHTML = '[Enter Zero]';
+        lbPrice.style.color = 'red';
         isValid = false;
-
     } else if (isNaN(descount.value)) {
-        lbDescount.innerHTML = '[Not a Char]';
+        lbDescount.innerHTML = '[Not a Number]';
         lbDescount.style.color = 'red';
         isValid = false;
+
     } else {
         lbDescount.innerHTML = 'Descount';
         lbDescount.style.color = 'white';
@@ -304,6 +307,7 @@ ValidationProduct = () => {
     return isValid;
 
 };
+
 
 
 //Print
@@ -326,6 +330,6 @@ btnResetPro.addEventListener('click', ResetProduct);
 
 
 $(document).ready(() => {
-    ShowTable();
+    //ShowTable();
     CountProduct();
 });
